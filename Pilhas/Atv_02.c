@@ -40,22 +40,22 @@ int main(){
 					printf("Pilha cheia - Stack Overflow\n");	
 				break;
 			case 2:
-					if(!isEmpty(p1)){//se nao for vazio
-						dado = pop(&p1,dado);
-						printf("Descricao: ");
-						fflush(stdin);
-						gets(dado.desc);
-						printf("Data: ");
-						fflush(stdin);
-						gets(dado.data);
-						push(&p1,dado)
-						printf("Desfeito com sucesso\n");
-					}
-					else
-						printf("Pilha vazia\n");
-				break;			
+				if(!isEmpty(p1)){//se nao for vazio
+					dado = pop(&p1,dado);
+					printf("Descricao: ");
+					fflush(stdin);
+					gets(dado.desc);
+					printf("Data: ");
+					fflush(stdin);
+					gets(dado.data);
+					push(&p1,dado);
+					printf("Desfeito com sucesso\n");
+				}
+				else
+					printf("Pilha vazia\n");
+			break;			
 		}// fim switch
-	    getch();// pausa
+	    	getch();// pausa
 		system("cls");// limpa tela	
 	}while(op!=0);
 	return 0;                                
