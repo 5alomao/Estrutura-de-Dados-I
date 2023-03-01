@@ -39,15 +39,6 @@ int isEmpty(tPilha p){
 	else
 	  return 0;  
 }
-//------------------------
-void mostraPilha(tPilha p){
-	while(p.topo> -1){
-		printf("%d|",p.pilha[p.topo]);
-		p.topo--;
-	}// fim while
-	printf("\n");
-}
-//------------------------
 void mostraPilha2(tPilha p){
 	while(p.topo> -1){
 		printf("%s - %s |",p.pilha[p.topo].desc,p.pilha[p.topo].data);
