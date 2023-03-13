@@ -23,7 +23,7 @@ public class Produto {
     
     @Override
     public String toString(){
-        return getDescricao()+ " : " + getQuantidade();
+        return getDescricao()+ ": " + getQuantidade();
     }
     
 }// fim classe
