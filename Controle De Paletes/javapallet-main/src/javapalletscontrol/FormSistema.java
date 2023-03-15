@@ -235,15 +235,16 @@ public class FormSistema extends javax.swing.JFrame {
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         
         Produto p;
-        if(minhaPilha.isEmpty()){
+        boolean existe = false;
+        if(minhaPilha.isEmpty())
             JOptionPane.showMessageDialog(rootPane, "Pilha vazia");
-        }else{
+        else{
             if(!txtProduto.getText().equals("") && !txtQtd.getText().equals("")){
                 while(!minhaPilha.isEmpty()){
                     p = minhaPilha.pop();
                     if(p.getDescricao().equals(txtProduto.getText())){
+                        existe = true;
                         JOptionPane.showMessageDialog(rootPane, "Encontrado...");
-
                         if(p.getQuantidade() > Integer.parseInt(txtQtd.getText())){
                            p.setQuantidade(p.getQuantidade() - Integer.parseInt(txtQtd.getText()));
                            minhaPilha.push(p);
@@ -259,8 +260,9 @@ public class FormSistema extends javax.swing.JFrame {
                     else{
                         pilhaAuxiliar.push(p);
                         mostraPilha(minhaPilha,listPilha);
-                        mostraPilha(pilhaAuxiliar,listAux);       
+                        mostraPilha(pilhaAuxiliar,listAux);
                     }
+                    
                 }
                 while(!pilhaAuxiliar.isEmpty()){
                 minhaPilha.push(pilhaAuxiliar.pop());
@@ -268,10 +270,11 @@ public class FormSistema extends javax.swing.JFrame {
                 mostraPilha(minhaPilha, listPilha);
                 }
             }
-            else{
+            else
                 JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos ...");
-            }
         }
+        if(!existe)
+            JOptionPane.showMessageDialog(rootPane, "Produto nao existe");
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     void mostraPilha(Stack<Produto> pilha, JTextArea meuList){
