@@ -27,4 +27,9 @@ class Fila{
     first(){
         return this.fila[0];
     }
+//--------------------
+    last(){
+        return this.fila[this.fila.length-1];
+    }
+//--------------------
 }

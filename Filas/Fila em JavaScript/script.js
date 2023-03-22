@@ -19,7 +19,7 @@ function removerFila(){
     }
     else{
         let rem = minhaFila.dequeue();
-        alert("Elemento removido:"+rem);
+        alert("Elemento removido: "+rem);
         console.log("Elemento removido");
         mostrarFila();
     }
@@ -35,8 +35,18 @@ function first(){
         alert("Fila Vazia");
     }
     else{
-        let primeiro = minhaFila.first();
-        alert("Primeiro Elemento:"+primeiro);
+        alert("Primeiro Elemento: "+minhaFila.first());
         console.log("Primeiro da Fila mostrado");
     }
 }
+
+function last(){
+    if(minhaFila.isEmpty()){
+        alert("Fila Vazia");
+    }
+    else{
+        alert("Ultimo Elemento: "+minhaFila.last());
+        console.log("Último da Fila mostrado");
+    }
+}
+
