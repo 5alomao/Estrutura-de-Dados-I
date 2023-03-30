@@ -41,58 +41,44 @@ void printLabirinto(char labirinto[MAX][MAX]){
     inicializa(&p);
     do{
     	lab[i][j] = 1;
-    	if(lab[i][j+1] == '.' || lab[i][j+1] == 'S'){
-    		if(lab[i][j+1] == 'S'){
-    			atual.x = i;
-    			atual.y = j+1;
-				printf("\nAchou saida :)");
-				break;
-			}
-			else{
+    	if(lab[i][j+1] == 'S'){
+    		atual.x = i;
+    		atual.y = j+1;
+    		break;
+		}else if(lab[i+1][j] == 'S'){
+    		atual.x = i+1;
+    		atual.y = j;
+    		break;
+		}else if(lab[i][j-1] == 'S'){
+    		atual.x = i;
+    		atual.y = j-1;
+    		break;
+		}else if(lab[i-1][j] == 'S'){
+    		atual.x = i-1;
+    		atual.y = j;
+    		break;
+    	}
+    	
+    	if(lab[i][j+1] == '.'){
     		atual.x = i;
     		atual.y = j;
     		push(&p,atual);
     		j++;
-			}
-		}else if(lab[i+1][j] == '.' || lab[i][j] == 'S'){
-			if(lab[i+1][j] == 'S'){
-				atual.x = i+1;
-    			atual.y = j;
-				printf("\nAchou saida :)");
-				break;
-			}
-			else{
+		}else if(lab[i+1][j] == '.'){
     		atual.x = i;
     		atual.y = j;
     		push(&p,atual);
     		i++;
-			}
-		}else if(lab[i][j-1] == '.' || lab[i][j] == 'S'){
-			if(lab[i][j-1] == 'S'){
-				atual.x = i;
-    			atual.y = j-1;
-				printf("\nAchou saida :)");
-				break;
-			}
-			else{
+		}else if(lab[i][j-1] == '.'){
     		atual.x = i;
     		atual.y = j;
     		push(&p,atual);
     		j--;
-			}
-		}else if(lab[i-1][j] == '.' || lab[i][j] == 'S'){
-			if(lab[i-1][j] == 'S'){
-				atual.x = i-1;
-    			atual.y = j;
-				printf("\nAchou saida :)");
-				break;
-			}
-			else{
+		}else if(lab[i-1][j] == '.'){
     		atual.x = i;
     		atual.y = j;
     		push(&p,atual);
     		i--;
-			}
 		}else if(!isEmpty(p)){
 			lab[i][j] = 2;
 			atual = pop(&p);
@@ -104,8 +90,10 @@ void printLabirinto(char labirinto[MAX][MAX]){
 		Sleep(0);
 		system("cls");
 		printLabirinto(lab);	
-	}while(lab[i][j] != 'S');
-		printf("\nPosicao da saida: [%d][%d]",atual.x,atual.y);
+	}while(1);
+		system("cls");
+		printLabirinto(lab);
+		printf("\nAchou Saida !\nPosicao da saida: [%d][%d]",atual.x,atual.y);
         return 1;
  }// fim funcao
 
