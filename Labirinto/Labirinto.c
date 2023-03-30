@@ -42,8 +42,12 @@ void printLabirinto(char labirinto[MAX][MAX]){
     do{
     	lab[i][j] = 1;
     	if(lab[i][j+1] == '.' || lab[i][j+1] == 'S'){
-    		if(lab[i][j+1] == 'S')
+    		if(lab[i][j+1] == 'S'){
+    			atual.x = i;
+    			atual.y = j+1;
 				printf("\nAchou saida :)");
+				break;
+			}
 			else{
     		atual.x = i;
     		atual.y = j;
@@ -51,8 +55,12 @@ void printLabirinto(char labirinto[MAX][MAX]){
     		j++;
 			}
 		}else if(lab[i+1][j] == '.' || lab[i][j] == 'S'){
-			if(lab[i+1][j] == 'S')
+			if(lab[i+1][j] == 'S'){
+				atual.x = i+1;
+    			atual.y = j;
 				printf("\nAchou saida :)");
+				break;
+			}
 			else{
     		atual.x = i;
     		atual.y = j;
@@ -60,8 +68,12 @@ void printLabirinto(char labirinto[MAX][MAX]){
     		i++;
 			}
 		}else if(lab[i][j-1] == '.' || lab[i][j] == 'S'){
-			if(lab[i][j-1] == 'S')
+			if(lab[i][j-1] == 'S'){
+				atual.x = i;
+    			atual.y = j-1;
 				printf("\nAchou saida :)");
+				break;
+			}
 			else{
     		atual.x = i;
     		atual.y = j;
@@ -69,8 +81,12 @@ void printLabirinto(char labirinto[MAX][MAX]){
     		j--;
 			}
 		}else if(lab[i-1][j] == '.' || lab[i][j] == 'S'){
-			if(lab[i-1][j] == 'S')
+			if(lab[i-1][j] == 'S'){
+				atual.x = i-1;
+    			atual.y = j;
 				printf("\nAchou saida :)");
+				break;
+			}
 			else{
     		atual.x = i;
     		atual.y = j;
@@ -89,6 +105,7 @@ void printLabirinto(char labirinto[MAX][MAX]){
 		system("cls");
 		printLabirinto(lab);	
 	}while(lab[i][j] != 'S');
+		printf("\nPosicao da saida: [%d][%d]",atual.x,atual.y);
         return 1;
  }// fim funcao
 
