@@ -20,7 +20,7 @@ void criaLabirinto(char labirinto[MAX][MAX]){
            labirinto[i][MAX-1]='*';
            }// fim for
         x=  (rand() % MAX-2) +1;
-        labirinto[x][15]='S';
+        labirinto[x][19]='S';
      }// fim funcao cria
 //-------------------------------------------     
 void printLabirinto(char labirinto[MAX][MAX]){
