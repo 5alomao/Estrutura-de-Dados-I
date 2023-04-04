@@ -25,7 +25,7 @@ int enqueue(tFila *f, tdado x){ //passagem por referência da fila
  	tno *novo = malloc(sizeof(tno)); //Alocando uma nova área de memória - Novo nó // malloc retorna pro novo o endereço da alocação
 	novo->dado = x;
 	novo->prox = NULL;
-	if(f->ini==NULL) //vazia
+	if(isEmpty(f)) //vazia
 		f->ini = novo;
 	else
 		f->fim->prox = novo; //encadeando novo nó
@@ -36,21 +36,38 @@ int enqueue(tFila *f, tdado x){ //passagem por referência da fila
 }
 //---------------------------
 tdado dequeue(tFila *f){
+	tno *aux;
+	if(isEmpty(f))
+		printf("Fila Vazia !");
+	else{
+	aux = f->ini;
 	f->ini = f->ini->prox;
 	f->tamanho--;
+	printf("Removido da Fila: %s:%d ...",aux->dado.processo, aux->dado.tempo);
+	}
 }
 //------------------------------
 int isEmpty(tFila f){
-
+	if(f.tamanho == 0)
+		return 1;
+	
+	return 0;
 }
 //--------------------------
 void mostra(tFila f){ //passagen de parâmetro por valor da fila
 	while(f.ini != NULL){
-		printf("%s: %d | ->",f.ini->dado.processo,f.ini->dado.tempo);
+		printf("%s:%d|->",f.ini->dado.processo,f.ini->dado.tempo);
 		f.ini = f.ini->prox;
 	}
 	printf("\n");
 }
+//----------------------------
+
+void primeiro_Ultimo(tFila f){
+	printf("Primeiro da Fila: %s:%d\n",f.ini->dado.processo, f.ini->dado.tempo);
+	printf("Ultimo da Fila: %s:%d\n",f.fim->dado.processo, f.fim->dado.tempo);
+}
+
 //----------------------------
 int menu(){
 	int op;
@@ -75,20 +92,26 @@ int main(){
 		mostra(f1);
 		op = menu();
 		switch(op){
-			case 1: printf("Entre com o processo e tempo:");
+			case 1: printf("Entre com o processo:");
 					fflush(stdin);
 					gets(x.processo);
+					printf("Tempo:");
 					scanf("%d",&x.tempo);
 					enqueue(&f1,x);
 			break;
-			case 2: if(!isEmpty(f1)) {
-				      // ?
-				     }// fim if vazio
-				     else
-				       printf("Process Queue empty :(\n");
+			case 2: 
+				if(!isEmpty(f1)) {
+					dequeue(&f1);
+				}// fim if vazio
+				else
+					printf("Process Queue empty :(\n");
 				break;
 			case 3:
-			 break;	
+				if(!isEmpty(f1))
+					primeiro_Ultimo(f1);
+			 	else
+			 		printf("Fila Vazia !");
+				 break;	
 			case 0: printf("Saindo .... ;)\n");	    
 		}// fim switch
 	    getch(); // system("pause");
