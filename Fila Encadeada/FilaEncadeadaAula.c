@@ -36,22 +36,22 @@ int enqueue(tFila *f, tdado x){ //passagem por referência da fila
 }
 //---------------------------
 tdado dequeue(tFila *f){
-	tno *aux;
+	tno *aux = f->ini;
+	tdado removido = f->ini->dado;
 	if(isEmpty(f))
 		printf("Fila Vazia !");
 	else{
-	aux = f->ini;
-	f->ini = f->ini->prox;
-	f->tamanho--;
-	printf("Removido da Fila: %s:%d ...",aux->dado.processo, aux->dado.tempo);
+		f->ini = f->ini->prox;
+		if(f->ini==NULL)
+			f->fim=NULL;
+		f->tamanho--;
+		free(aux);
+		return removido;
 	}
 }
 //------------------------------
 int isEmpty(tFila f){
-	if(f.tamanho == 0)
-		return 1;
-	
-	return 0;
+	return(f.tamanho == 0)?1:0;
 }
 //--------------------------
 void mostra(tFila f){ //passagen de parâmetro por valor da fila
@@ -63,15 +63,18 @@ void mostra(tFila f){ //passagen de parâmetro por valor da fila
 }
 //----------------------------
 
-void primeiro_Ultimo(tFila f){
-	printf("Primeiro da Fila: %s:%d\n",f.ini->dado.processo, f.ini->dado.tempo);
-	printf("Ultimo da Fila: %s:%d\n",f.fim->dado.processo, f.fim->dado.tempo);
+tdado first(tFila f){ 
+	return f.ini->dado;
+	
 }
 
+tdado last(tFila f){
+	return f.fim->dado;
+}
 //----------------------------
 int menu(){
 	int op;
-	printf("*** Estrutura de Dados I - Fila Encadeada ****\n");
+	printf("\n*** Estrutura de Dados I - Fila Encadeada ****\n");
 	printf("1-Enqueue (Inserir)\n");
 	printf("2-Dequeue (Remover)\n");
 	printf("3-Inicio e Fim\n");
@@ -86,32 +89,40 @@ int menu(){
 int main(){
 	tFila f1;
 	tdado x;
+	tdado f;
+	tdado l;
 	int op;
 	inicializa(&f1);
 	do{
 		mostra(f1);
 		op = menu();
 		switch(op){
-			case 1: printf("Entre com o processo:");
-					fflush(stdin);
-					gets(x.processo);
-					printf("Tempo:");
-					scanf("%d",&x.tempo);
-					enqueue(&f1,x);
-			break;
+			case 1: 
+				printf("Entre com o processo:");
+				fflush(stdin);
+				gets(x.processo);
+				printf("Tempo:");
+				scanf("%d",&x.tempo);
+				enqueue(&f1,x);
+				break;
 			case 2: 
 				if(!isEmpty(f1)) {
-					dequeue(&f1);
+					x = dequeue(&f1);
+					printf("Removido: %s:%d\n",x.processo,x.tempo);
 				}// fim if vazio
 				else
 					printf("Process Queue empty :(\n");
 				break;
 			case 3:
-				if(!isEmpty(f1))
-					primeiro_Ultimo(f1);
-			 	else
+				if(!isEmpty(f1)){
+					f = first(f1);
+					printf("Primeiro %s:%d\n",f.processo,f.tempo);
+					l = last(f1);
+					printf("Ultimo %s:%d\n",l.processo,l.tempo);
+				}
+				else
 			 		printf("Fila Vazia !");
-				 break;	
+				break;	
 			case 0: printf("Saindo .... ;)\n");	    
 		}// fim switch
 	    getch(); // system("pause");
