@@ -138,14 +138,15 @@ void printInvertida(tdeque minhaDeque){ // alterar
 
 //-----------------------------
 
-void mostraEndereco(tdeque minhaDeque){
+/*void mostraEndereco(tdeque minhaDeque){
 	while(minhaDeque.ini != NULL){
-		/*printf("<- %x| %d [%x] | %x ->\n ",
+		printf("<- %x| %d [%x] | %x ->\n ",
 		        minhaDeque.ini->ant, minhaDeque.ini->dado, minhaDeque.ini , minhaDeque.ini->prox); // mostro o dado
-		minhaDeque.ini = minhaDeque.ini->prox; // deslocando para o prox*/
+		minhaDeque.ini = minhaDeque.ini->prox; // deslocando para o prox
 	}// fim while
 	printf("\n");
 }
+*/
 
 //-----------------------------
 int menu(){
