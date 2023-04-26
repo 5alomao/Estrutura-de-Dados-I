@@ -9,6 +9,7 @@ typedef struct no{
 
 typedef struct{
 	tno *ini,*fim; // head e tail
+	int tamanho;
 }tdeque;
 
 //-------------------------------
@@ -16,6 +17,7 @@ typedef struct{
 void inicializa(tdeque *minhaDeque){
 	minhaDeque->ini = NULL;
 	minhaDeque->fim = NULL;
+	minhaDeque->tamanho = 0;
 }
 
 //------------------------------
@@ -29,14 +31,15 @@ int addLast(tdeque *minhaDeque, tdado novoDado){
 	  
 	novoNo->dado = novoDado;
 	novoNo->prox = NULL;
-	novoNo->ant = minhaDeque->fim; // alteracao DEQUE - fazer anterior receber o fim
+	novoNo->ant = minhaDeque->fim; // alteracao DEQUE - fazer anterior do novo receber o fim
 	
 	if(minhaDeque->ini==NULL) // testando se esta vazia
-	  minhaDeque->ini = novoNo;
+	  minhaDeque->ini = novoNo; //inicio recebe o novo
 	else
-	  minhaDeque->fim->prox = novoNo;
+	  minhaDeque->fim->prox = novoNo; //fim prox recebe novo
 	  
-	minhaDeque->fim = novoNo;    
+	minhaDeque->fim = novoNo; //fim recebe novo no
+	minhaDeque->tamanho++;    
 		
 	return 1;
 }
@@ -57,9 +60,10 @@ int addFirst(tdeque *minhaDeque, tdado novoDado){
 	if(minhaDeque->ini==NULL) // testando se esta vazia
 	  minhaDeque->ini = novoNo;
 	else
-	  minhaDeque->ini->prox = novoNo;
+	  minhaDeque->ini->ant = novoNo;
 	  
-	minhaDeque->ini = novoNo;    
+	minhaDeque->ini = novoNo;
+	minhaDeque->tamanho++;   
 		
 	return 1;
 }
@@ -67,14 +71,39 @@ int addFirst(tdeque *minhaDeque, tdado novoDado){
 //---------------------------------------------
 
 tdado removeFirst(tdeque *minhaDeque){
+	
 	tdado retorno = minhaDeque->ini->dado; // pegando o dado armazenado no no
+	
 	tno *aux = minhaDeque->ini; // guardando o endereco para limpar a memoria
+	
 	minhaDeque->ini = minhaDeque->ini->prox; // removendo, deslocando o apontamento
-	if(minhaDeque->ini == NULL) // era o ultimo elemento
-	   minhaDeque->fim = NULL;
-	//else  
+	
+	if(minhaDeque->ini == NULL) // testa se era o ultimo elemento
+	   minhaDeque->fim = NULL; // fim recebe null também
+	else  
+		minhaDeque->ini->ant = NULL;
 	    // Alteracao da DEQUE  , o anterior do inicio aponta para NULL
 	free(aux); // limpando a memoria
+	minhaDeque->tamanho--;  
+	return retorno; // retorno o dado removido
+}
+//----------------------
+
+tdado removeLast(tdeque *minhaDeque){
+	
+	tdado retorno = minhaDeque->fim->dado; // pegando o dado armazenado no no
+	
+	tno *aux = minhaDeque->fim; // guardando o endereco para limpar a memoria
+	
+	minhaDeque->fim = minhaDeque->fim->ant; // removendo, deslocando o apontamento
+	
+	if(minhaDeque->fim == NULL) // testa se era o ultimo elemento
+	   minhaDeque->ini = NULL; // fim recebe null também
+	else  
+		minhaDeque->fim->prox = NULL;
+		
+	free(aux); // limpando a memoria
+	minhaDeque->tamanho--;  
 	return retorno; // retorno o dado removido
 }
 
@@ -91,7 +120,7 @@ int isEmpty(tdeque minhaDeque){
 
 void printList(tdeque minhaDeque){
 	while(minhaDeque.ini != NULL){
-		printf("%d -",minhaDeque.ini->dado); // mostro o dado
+		printf("%d ",minhaDeque.ini->dado); // mostro o dado
 		minhaDeque.ini = minhaDeque.ini->prox; // deslocando para o prox
 	}// fim while
 	printf("\n");
@@ -101,7 +130,8 @@ void printList(tdeque minhaDeque){
 
 void printInvertida(tdeque minhaDeque){ // alterar
 	while(minhaDeque.fim != NULL){
-		// percorrer invertida
+		printf("%d ",minhaDeque.fim->dado); // mostro o dado
+		minhaDeque.fim = minhaDeque.fim->ant; // deslocando para o anterior
 	}// fim while
 	printf("\n");
 }
@@ -139,6 +169,8 @@ int main(){
 	tdeque minhaDeque;
 	inicializa(&minhaDeque);
 	do{
+		printf("Tamanho da Fila: %d\n",minhaDeque.tamanho);
+		printf("Ini: %x    Fim: %x\n",minhaDeque.ini, minhaDeque.fim);
 		printList(minhaDeque);
 		op = menu();
 		switch(op){
@@ -174,6 +206,13 @@ int main(){
 				else
 				   printf("Fila cheia:(\n");  
 				break; 		
+			case 6: if(!isEmpty(minhaDeque)){
+				      novoDado = removeLast(&minhaDeque);
+				      printf("Removido: %d\n",novoDado);
+					}// fim if
+					else
+					  printf("Fila vazia :(\n");
+			   break;
 			case 0: printf("Saindo...");  
 			break;	
 		}// fim switch
