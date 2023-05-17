@@ -27,9 +27,12 @@ void printHash(tlista vet[], int n){
 }
 //-------------------------
 float buscaHash(tlista tabHash[],tdado x){
-	// int map = funcaoHash(x.nome[0]);
 	// map possui a posicao da lista de nomes 
-	// agora implemente e use a funcao buscaList para percorrer a lista dos nom
+	// agora implemente e use a funcao buscaList para percorrer a lista dos nomes
+	float med = -1;
+	int map = funcaoHash(x.nome[0]);
+	med = buscaList(tabHash[map],x);
+	return med;
 }
 //--------------------------
 
@@ -65,6 +68,12 @@ int main()
    				scanf("%f",&x.media);
    				r=insereHash(tabHash, x);
    				printf("Inserido na posicao :%d\n",r);
+   			break;
+   		case 2:
+   			printf("Digite nome para Busca:");
+   			fflush(stdin); gets(x.nome);
+   			x.nome[0] = toupper(x.nome[0]);
+   			printf("Media: %.2f\n",buscaHash(tabHash,x));
    			break;
    		case 0:
 		break;   	
