@@ -8,7 +8,7 @@ public class FormSistema extends javax.swing.JFrame {
     
     public FormSistema() {
         initComponents();
-        
+        mostra();
     }
 
 
@@ -195,10 +195,23 @@ public class FormSistema extends javax.swing.JFrame {
         p.setCpf(txtCpf.getText());
         
         meuHash.put(p.getCpf(), p);
+        mostra();
     }//GEN-LAST:event_btnAddhmActionPerformed
 
     void mostra(){
         //mostrar o meu Hash no List
+        listHashTable.setText("");
+        if(!meuHash.isEmpty()){
+            for (Map.Entry<String, Pessoa> entry : meuHash.entrySet()) {
+            String cpf = entry.getKey();
+            Pessoa p = entry.getValue();
+            listHashTable.append(cpf + ": " + p.toString() + "\n");
+        }
+        }else{
+            listHashTable.setText("Fila Vazia ! ");
+        }
+        txtNome.setText("");
+        txtCpf.setText("");
     }
     
     private void btnBuscarhmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarhmActionPerformed
