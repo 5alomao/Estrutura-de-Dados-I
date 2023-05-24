@@ -1,16 +1,18 @@
 package javahash;
+
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
 public class FormSistema extends javax.swing.JFrame {
     HashMap<String, Pessoa> meuHash = new HashMap<>();
+    LinkedList<Pessoa> minhaLista = new LinkedList<>();    
+    ArrayList<String> arrayBusca = new ArrayList<>(); // carregar dados de busca
     
     public FormSistema() {
         initComponents();
         mostra();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -183,18 +185,25 @@ public class FormSistema extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    void carregaDados(){
+        
+    }
+    
     private void btnCarregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCarregaActionPerformed
 
     private void btnAddhmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddhmActionPerformed
         Pessoa p = new Pessoa();
+        
         p.setNome(txtNome.getText());
         p.setCpf(txtCpf.getText());
         
         meuHash.put(p.getCpf(), p);
+        
         mostra();
     }//GEN-LAST:event_btnAddhmActionPerformed
 
@@ -202,25 +211,31 @@ public class FormSistema extends javax.swing.JFrame {
         //mostrar o meu Hash no List
         listHashTable.setText("");
         if(!meuHash.isEmpty()){
-            for (Map.Entry<String, Pessoa> entry : meuHash.entrySet()) {
-            String cpf = entry.getKey();
-            Pessoa p = entry.getValue();
-            listHashTable.append(cpf + ": " + p.toString() + "\n");
-        }
+            for (Map.Entry<String, Pessoa> dado : meuHash.entrySet()) { //para cada entrada <chave, valor> dentro da tabela hash
+            listHashTable.append(dado.getValue()+"\n"); //append adiona e mantém o que existe antes
+            }
         }else{
-            listHashTable.setText("Fila Vazia ! ");
+            listHashTable.setText("Tabela Vazia ! ");
         }
         txtNome.setText("");
         txtCpf.setText("");
     }
     
     private void btnBuscarhmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarhmActionPerformed
-
+        
+        Pessoa p;
+        if(meuHash.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Tabela Vazia!");
+        }else{
+            p = meuHash.get(txtCpf.getText());
+            if(p == null)
+                lblPessoa.setText("Pessoa: Não Existe");
+            else{
+                lblPessoa.setText("Pessoa: " + p.getNome());
+            }
+        }
     }//GEN-LAST:event_btnBuscarhmActionPerformed
    
-       
-     
-    
     /**
      * @param args the command line arguments
      */
