@@ -2,6 +2,8 @@ package javahash;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class FormSistema extends javax.swing.JFrame {
@@ -27,7 +29,9 @@ public class FormSistema extends javax.swing.JFrame {
         btnBuscarhm = new javax.swing.JButton();
         btnAddhm = new javax.swing.JButton();
         btnCarrega = new javax.swing.JButton();
-        btnCarrega1 = new javax.swing.JButton();
+        btnCarregarDadosBusca = new javax.swing.JButton();
+        btnBuscarDados = new javax.swing.JButton();
+        btnSalvarArquivo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listHashTable = new javax.swing.JTextArea();
@@ -99,12 +103,29 @@ public class FormSistema extends javax.swing.JFrame {
             }
         });
 
-        btnCarrega1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        btnCarrega1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javahash/clipboard.png"))); // NOI18N
-        btnCarrega1.setText("Buscar Dados");
-        btnCarrega1.addActionListener(new java.awt.event.ActionListener() {
+        btnCarregarDadosBusca.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        btnCarregarDadosBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javahash/clipboard.png"))); // NOI18N
+        btnCarregarDadosBusca.setText("Carregar Dados");
+        btnCarregarDadosBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCarrega1ActionPerformed(evt);
+                btnCarregarDadosBuscaActionPerformed(evt);
+            }
+        });
+
+        btnBuscarDados.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        btnBuscarDados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javahash/clipboard.png"))); // NOI18N
+        btnBuscarDados.setText("Comparar Buscas");
+        btnBuscarDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarDadosActionPerformed(evt);
+            }
+        });
+
+        btnSalvarArquivo.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        btnSalvarArquivo.setText("Salvar");
+        btnSalvarArquivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarArquivoActionPerformed(evt);
             }
         });
 
@@ -114,42 +135,40 @@ public class FormSistema extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnAddhm, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarhm, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnCarrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAddhm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCarrega1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(70, 70, 70)))
-                        .addComponent(btnBuscarhm, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnBuscarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCarregarDadosBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCarrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSalvarArquivo))
+                .addGap(86, 86, 86))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(btnBuscarhm, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25)
-                .addComponent(btnAddhm)
+                .addGap(18, 18, 18)
+                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBuscarhm)
+                    .addComponent(btnAddhm))
+                .addGap(11, 11, 11)
+                .addComponent(btnSalvarArquivo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCarrega)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCarrega1)
+                .addComponent(btnCarregarDadosBusca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscarDados)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -167,16 +186,17 @@ public class FormSistema extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(109, 109, 109))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,21 +249,17 @@ public class FormSistema extends javax.swing.JFrame {
     void carregaDadosBusca(){
         String csvFile = "dadosBusca.csv";
         String line = "";
-        String[] dados = null;
         
-        /*
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
-                String[] dado = line.split(";");
-                dados[0] = dado[1];
-                meuHash.put();
-                minhaLista.add();
-                System.out.println(p);
+                arrayBusca.add(line);
             }// fim percurso no arquivo
+            for(String cpf : arrayBusca){
+                System.out.println(cpf);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
     }
     
     private void btnCarregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregaActionPerformed
@@ -292,13 +308,70 @@ public class FormSistema extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarhmActionPerformed
 
-    private void btnCarrega1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarrega1ActionPerformed
+    private void btnCarregarDadosBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarDadosBuscaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCarrega1ActionPerformed
-   
+        carregaDadosBusca();
+        mostra();
+    }//GEN-LAST:event_btnCarregarDadosBuscaActionPerformed
+
+    private void btnBuscarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDadosActionPerformed
+        // TODO add your handling code here:
+        if(meuHash.isEmpty())
+            JOptionPane.showMessageDialog(null, "Tabela Vazia!");
+        
+        if(arrayBusca.isEmpty())
+            JOptionPane.showMessageDialog(null, "Vetor Vazio!");
+           
+        Pessoa p = new Pessoa();
+        
+        int totalCpfA = 0;
+        int totalCpfL = 0;
+        
+        long tempoInicial = System.currentTimeMillis();
+        for(String cpf : arrayBusca){
+            if(meuHash.containsKey(cpf))
+                totalCpfA++;             
+        }
+        long tempoFinal = System.currentTimeMillis();
+        System.out.println("Total de CPF Existentes: "+ totalCpfA);
+        System.out.printf("%.3f segundos%n", (tempoFinal - tempoInicial) / 1000.00);
+        
+        tempoInicial = System.currentTimeMillis();
+        for(String cpf : arrayBusca){
+            for(Pessoa pessoa : minhaLista){
+                if(pessoa.getCpf().equals(cpf))
+                    totalCpfL++;            
+            }    
+        }
+        tempoFinal = System.currentTimeMillis();
+        System.out.println("Total de CPF Existentes: "+ totalCpfL);
+        System.out.printf("%.3f segundos%n", (tempoFinal - tempoInicial) / 1000.00);
+
+    }//GEN-LAST:event_btnBuscarDadosActionPerformed
+
+    private void btnSalvarArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarArquivoActionPerformed
+        // TODO add your handling code here:
+        String csvFile = "dadosComparados.csv";
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
+            for(String cpf : arrayBusca){
+            if(meuHash.containsKey(cpf)){
+                bw.write(cpf+" | Existe");
+            }else{
+                bw.write(cpf+" | Não Existe");
+            }
+            
+            bw.newLine();           
+        }
+        } catch (IOException ex) {
+            Logger.getLogger(FormSistema.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_btnSalvarArquivoActionPerformed
+    
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -334,9 +407,11 @@ public class FormSistema extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddhm;
+    private javax.swing.JButton btnBuscarDados;
     private javax.swing.JButton btnBuscarhm;
     private javax.swing.JButton btnCarrega;
-    private javax.swing.JButton btnCarrega1;
+    private javax.swing.JButton btnCarregarDadosBusca;
+    private javax.swing.JButton btnSalvarArquivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
