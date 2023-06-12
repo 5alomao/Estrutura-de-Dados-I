@@ -1,32 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int n = 0;
+
 int fib(int termo){
 	int r;
-	
-	printf("Fibo(%d)\n",termo);getch();
-	if(termo == 0){
-		printf("Fibo(%d) = 0\n",termo);getch();
+	if(termo == 0)
 		return 0;
-	}
 		
-	if(termo == 1){
-		printf("Fibo(%d) = 1\n",termo);getch();
+	if(termo == 1)
 		return 1;
-	}
+	
 	
 	//passo recursivo
+	n++;
 	r = fib(termo-1) + fib(termo-2);
-	printf("Fibo(%d) = %d\n",termo,r);
+	n++;
 	return r;
 }// fim funcao
 
 int main(){
-	int termo;
+	int testes;
+	int valor;
+	int i=0;
+	scanf("%d",&testes);
+	for(i; i<testes;i++){
+	    scanf("%d",&valor);
+	    printf("fib(%d) = %d calls = %d\n",valor,n,fib(valor));
+	    n=0;
+	}
 	
-	printf("Termo: ");
-	scanf("%d",&termo);
-	
-	printf("Fibonacci: %d",fib(termo));
 	return 0;
 }
